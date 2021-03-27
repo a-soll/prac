@@ -3,10 +3,12 @@
 
 #include "NSObjects.h"
 
-extern NSStringRef stringWithUTF8String(const char *cstring);
+extern NSString stringWithUTF8String(const char *cstring);
 
-const char* CFStringGetCStringPTR(NSStringRef str);
+const char* CFStringGetCStringPTR(NSString str);
 
-void NSStringShow(NSStringRef str);
+void NSStringShow(NSString str);
+
+id _NSStringId(NSString str);
 
 #endif

@@ -13,7 +13,7 @@
 
 typedef const BRIDGE_TYPE(id) void *CFTypeRef;
 
-typedef struct _NSString *NSStringRef;
+typedef struct _NSString *NSString;
 typedef struct _NSURL *NSURL;
 typedef struct _NSWorkspace *NSWorkspace;
 

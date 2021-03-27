@@ -7,6 +7,6 @@
 
 typedef struct _NSURL *NSURL;
 
-NSURL URLWithSString(NSStringRef URLString);
+NSURL URLWithSString(NSString URLString);
 
 #endif

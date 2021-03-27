@@ -10,8 +10,8 @@ typedef CGRect NSRect;
 typedef CGPoint NSPoint;
 // [[NSWorkspace sharedWorkspace] openFile:@"/Myfiles/README" withApplication:@"TextEdit"];
 int main() {
-    NSStringRef abc;
-    NSStringRef cc;
+    NSString abc;
+    NSString cc;
     NSWorkspace ws;
     NSURL url;
 

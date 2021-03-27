@@ -9,8 +9,8 @@ struct _NSString {
     int length;
 };
 
-extern NSStringRef stringWithUTF8String(const char *cstring) {
-    NSStringRef ns = malloc(sizeof(*ns));
+extern NSString stringWithUTF8String(const char *cstring) {
+    NSString ns = malloc(sizeof(*ns));
     Class temp_class = objc_getClass("NSString");
     id temp_id;
     SEL stringWithUTF8StringSel = sel_registerName("stringWithUTF8String:");
@@ -26,11 +26,15 @@ extern NSStringRef stringWithUTF8String(const char *cstring) {
     return ns;
 }
 
-const char* CFStringGetCStringPTR(NSStringRef str) {
+const char* CFStringGetCStringPTR(NSString str) {
     return str->data;
 }
 
-void NSStringShow(NSStringRef str) {
+id _NSStringId(NSString str) {
+    return str->id;
+}
+
+void NSStringShow(NSString str) {
     printf("%s\n", str->data);
 }
 
