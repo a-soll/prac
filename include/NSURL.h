@@ -7,6 +7,8 @@
 
 typedef struct _NSURL *NSURL;
 
-NSURL URLWithSString(NSString URLString);
+NSURL URLWithCString(const char* URLString);
+
+id _NSURLId(NSURL url);
 
 #endif

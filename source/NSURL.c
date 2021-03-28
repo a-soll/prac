@@ -1,21 +1,25 @@
 #include "../include/NSURL.h"
-// #include "NSString.c"
+#include <stdio.h>
 
 struct _NSURL {
     Class c;
     id id;
-    NSString data;
+    NSString str;
 };
 
-NSURL URLWithSString(NSString URLString) {
-    NSURL url = malloc(sizeof(*url));
+NSURL URLWithCString(const char *URLString) {
+    NSURL url = malloc(sizeof(NSURL));
+    NSString nstr = stringWithUTF8String(URLString);
     Class temp_class = objc_getClass("NSURL");
     id temp_id;
     SEL URLWithStringSel = sel_registerName("URLWithString:");
-    temp_id = ((id(*)(Class, SEL, id))objc_msgSend)(temp_class, URLWithStringSel, _NSStringId(URLString));
+    temp_id = ((id(*)(Class, SEL, id))objc_msgSend)(temp_class, URLWithStringSel, _NSStringId(nstr));
     url->c = temp_class;
     url->id = temp_id;
-    url->data = URLString;
-    NSStringShow(url->data);
+    url->str = nstr;
     return url;
+}
+
+id _NSURLId(NSURL url) {
+    return url->id;
 }

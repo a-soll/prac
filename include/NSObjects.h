@@ -7,10 +7,6 @@
 
 #define BRIDGE_TYPE(T)
 
-// #include "NSString.h"
-// #include "NSWorkspace.h"
-// #include "NSURL.h"
-
 typedef const BRIDGE_TYPE(id) void *CFTypeRef;
 
 typedef struct _NSString *NSString;

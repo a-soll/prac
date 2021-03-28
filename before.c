@@ -1,7 +1,6 @@
-    NSString abc;
-    NSString cc;
-    abc = stringWithUTF8String("YO");
-    cc = stringWithUTF8String("heheh");
+// raw code being translated
+int main() {
+    // [[NSWorkspace sharedWorkspace] openFile:@"/Myfiles/README" withApplication:@"TextEdit"];
     Class NSWorkspace = objc_getClass("NSWorkspace");
     SEL sharedWorkspace = sel_registerName("sharedWorkspace");
     id NSWorkspace_id = ((id(*)(Class, SEL))objc_msgSend)(NSWorkspace, sharedWorkspace);
@@ -14,3 +13,4 @@
 
     SEL open = sel_registerName("openFile:withApplication:");
     ((void(*)(id, SEL, id, id))objc_msgSend)(NSWorkspace_id, open, file, app);
+}

@@ -1,6 +1,6 @@
 #include "../include/NSString.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 struct _NSString {
     Class c;
@@ -20,13 +20,13 @@ extern NSString stringWithUTF8String(const char *cstring) {
     ns->id = temp_id;
     ns->data = cstring;
     ns->length = 0;
-    while (cstring[ns->length] != 0 ) {
+    while (cstring[ns->length] != 0) {
         ns->length++;
     }
     return ns;
 }
 
-const char* CFStringGetCStringPTR(NSString str) {
+const char *CFStringGetCStringPTR(NSString str) {
     return str->data;
 }
 
@@ -37,4 +37,3 @@ id _NSStringId(NSString str) {
 void NSStringShow(NSString str) {
     printf("%s\n", str->data);
 }
-
