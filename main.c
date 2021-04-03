@@ -6,20 +6,25 @@
 #include <objc/runtime.h>
 #include <stdio.h>
 
-typedef CGRect NSRect;
-typedef CGPoint NSPoint;
-
 int main() {
-    NSString file;
-    NSString app;
+    //     NSArray apps;
+    // nsarr_init(&apps);
+    // SEL running_apps = sel_registerName("runningApplications");
+    // apps.id = ((id(*)(id, SEL))objc_msgSend)(ws.id, running_apps);
+
+    // int count;
+    // SEL apps_count = sel_registerName("count");
+    // count = ((int (*)(id, SEL))objc_msgSend)(apps.id, apps_count);
+
+    // NSRunningApplication app;
+    NSArray apps;
     NSWorkspace ws;
+    NSRunningApplication runapp;
 
-    file = stringWithUTF8String("/Users/adam/code/mac_window/dump");
-    app = stringWithUTF8String("TextEdit");
     ws = sharedWorkspace();
-    openURLsWithApp(ws, file, app);
+    apps = runningApplications(ws);
 
-    free(file);
-    free(app);
-    free(ws);
+    for (int i = 0; i < length(apps); i++) {
+        runningApplicationAtIndex(apps, runapp, i);
+    }
 }

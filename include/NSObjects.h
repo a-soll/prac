@@ -5,12 +5,10 @@
 #include <objc/message.h>
 #include <stdlib.h>
 
-#define BRIDGE_TYPE(T)
-
-typedef const BRIDGE_TYPE(id) void *CFTypeRef;
-
 typedef struct _NSString *NSString;
 typedef struct _NSURL *NSURL;
 typedef struct _NSWorkspace *NSWorkspace;
+typedef struct _NSArray *NSArray;
+typedef struct _NSRunningApplication *NSRunningApplication;
 
 #endif

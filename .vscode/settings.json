@@ -73,7 +73,8 @@
         "typeinfo": "c"
     },
     "code-runner.executorMapByGlob": {
-        "*.c|*.h": "cd $workspaceRoot && clang -o $workspaceRoot/a.out $workspaceRoot/main.c $workspaceRoot/source/NSString.c $workspaceRoot/source/NSWorkspace.c $workspaceRoot/source/NSURL.c -framework AppKit && $workspaceRoot/a.out"
+        "test.c": "cd $workspaceRoot && clang -o $workspaceRoot/a.out $workspaceRoot/test.c",
+        "*.c|*.h": "cd $workspaceRoot && clang -o $workspaceRoot/a.out $workspaceRoot/main.c $workspaceRoot/source/NSString.c $workspaceRoot/source/NSWorkspace.c $workspaceRoot/source/NSURL.c $workspaceRoot/source/NSArray.c $workspaceRoot/source/NSRunningApplication.c -framework AppKit && $workspaceRoot/a.out"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/."
 }
