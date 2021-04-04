@@ -1,7 +1,10 @@
 #include <NSObjects/NSBase.h>
 
-// Get NSRunningApplication object of Safari Technology Preview and unhide it if hidden or
-// hide if unhidden
+/*  Get NSRunningApplication object of Safari Technology Preview and unhide it if hidden or
+    hide if unhidden
+    The Obj-C call:
+    [[NSWorkspace sharedWorkspace] openFile:@"/Myfiles/untitled.rtf" withApplication:@"TextEdit"];
+*/
 int main() {
     NSArray apps;
     NSWorkspace sharedws;
