@@ -2,44 +2,31 @@
 #include "../include/NSArray.h"
 #include "../include/NSRunningApplication.h"
 
-struct _NSWorkspace {
-    Class c;
-    id id;
-    Class contents;
-};
-
-id get_id(NSWorkspace ws) {
-    return ws->id;
-}
-
-NSWorkspace sharedWorkspace() {
-    NSWorkspace ws = malloc(sizeof(NSWorkspace));
+void sharedWorkspace(NSWorkspace *workspace) {
     Class temp_class = objc_getClass("NSWorkspace");
     id temp_id;
+
     SEL sharedws = sel_registerName("sharedWorkspace");
-
     temp_id = ((id(*)(Class, SEL))objc_msgSend)(temp_class, sharedws);
-    ws->c = temp_class;
-    ws->id = temp_id;
-    return ws;
+    workspace->_c = temp_class;
+    workspace->_id = temp_id;
 }
 
-void openURLsWithApp(NSWorkspace ws, NSString file, NSString app) {
-    id fileId = _NSStringId(file);
-    id appId = _NSStringId(app);
+// Pass sharedWorkspace instance as well as filepath and app to open with
+void openURLsWithApp(NSWorkspace *workspace, NSString *file, NSString *app) {
     SEL open = sel_registerName("openFile:withApplication:");
-    ((void (*)(id, SEL, id, id))objc_msgSend)(ws->id, open, fileId, appId);
+    ((void (*)(id, SEL, id, id))objc_msgSend)(workspace->_id, open, file->_id, app->_id);
 }
 
-NSArray runningApplications(NSWorkspace sharedWorkspace) {
+// pass sharedWorkspace instance and NSArray to populate
+void runningApplications(NSWorkspace *sharedWorkspace, NSArray *arr) {
     Class contents = objc_getClass("NSRunningApplication");
     SEL running_apps = sel_registerName("runningApplications");
-    NSArray temp_arr = _get_array(sharedWorkspace->id, running_apps);
+    _get_array(arr, sharedWorkspace->_id, running_apps);
     sharedWorkspace->contents = contents;
-    return temp_arr;
 }
 
-void runningApplicationAtIndex(NSArray arr, NSRunningApplication app, int index) {
-    id app_id = objectAtIndex(arr, index);
-    _NSRunningAppSetId(app, app_id);
+void runningApplicationAtIndex(NSArray *arr, NSRunningApplication *app, int index) {
+    id temp_id = objectAtIndex(arr, index);
+    _NSRunningAppSetId(app, temp_id);
 }

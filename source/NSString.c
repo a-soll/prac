@@ -1,39 +1,25 @@
 #include "../include/NSString.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-struct _NSString {
-    Class c;
-    id id;
-    const char *data;
-    int length;
-};
-
-extern NSString stringWithUTF8String(const char *cstring) {
-    NSString ns = malloc(sizeof(*ns));
-    Class temp_class = objc_getClass("NSString");
-    id temp_id;
-    SEL stringWithUTF8StringSel = sel_registerName("stringWithUTF8String:");
-
-    temp_id = ((id(*)(Class, SEL, const char *))objc_msgSend)(temp_class, stringWithUTF8StringSel, cstring);
-    ns->c = temp_class;
-    ns->id = temp_id;
-    ns->data = cstring;
-    ns->length = 0;
-    while (cstring[ns->length] != 0) {
-        ns->length++;
+// Handles populating the cstring and length members of NSString structs
+void _c_string(NSString *nstr) {
+    SEL m = sel_registerName("UTF8String");
+    nstr->cstring = ((const char *(*)(id, SEL))objc_msgSend)(nstr->_id, m);
+    nstr->length = 0;
+    while (nstr->cstring[nstr->length] != 0) {
+        nstr->length++;
     }
-    return ns;
 }
 
-const char *CFStringGetCStringPTR(NSString str) {
-    return str->data;
+void stringWithUTF8String(NSString *nstr, const char *cstring) {
+    nstr->_c = objc_getClass("NSString");
+    SEL stringWithUTF8StringSel = sel_registerName("stringWithUTF8String:");
+    nstr->_id = ((id(*)(Class, SEL, const char *))objc_msgSend)(nstr->_c, stringWithUTF8StringSel, cstring);
+    _c_string(nstr);
 }
 
-id _NSStringId(NSString str) {
-    return str->id;
-}
-
-void NSStringShow(NSString str) {
-    printf("%s\n", str->data);
+// creates NSString from an id. Typically called from runtime calls that return an NSString
+void _NSStringFromId(NSString *nstr, id id) {
+    nstr->_c = objc_getClass("NSString");
+    nstr->_id = id;
+    _c_string(nstr);
 }

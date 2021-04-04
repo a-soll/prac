@@ -5,10 +5,8 @@
 #include "NSObjects.h"
 #include "NSString.h"
 
-typedef struct _NSURL *NSURL;
+void URLWithCString(NSURL *url, NSString *URLString);
 
-NSURL URLWithCString(const char* URLString);
-
-id _NSURLId(NSURL url);
+id _NSURLId(NSURL *url);
 
 #endif

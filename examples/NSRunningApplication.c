@@ -1,7 +1,7 @@
-#include "include/NSBase.h"
-#include <string.h>
-#include <stdio.h>
+#include <NSObjects/NSBase.h>
 
+// Get NSRunningApplication object of Safari Technology Preview and unhide it if hidden or
+// hide if unhidden
 int main() {
     NSArray apps;
     NSWorkspace sharedws;

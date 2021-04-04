@@ -4,15 +4,33 @@
 #include "NSObjects.h"
 #include "NSURL.h"
 
-NSWorkspace sharedWorkspace();
+// Pass workspace instance to instantiate as a sharedWorkspace
+void sharedWorkspace(NSWorkspace *workspace);
 
-void openURLsWithApp(NSWorkspace ws, NSString file, NSString app);
+/*!
+    @function
+    Gets NSRunningApplication at current index of given NSArray
+    @param NSArray The array with object you want to get
+    @param NSRunningApplication The NSRunningApplication you want to instantiate
+    @param index The index of the array to get
+*/
+void openURLsWithApp(NSWorkspace *sharedWorkspace, NSString *file, NSString *app);
 
-void runningApplicationAtIndex(NSArray arr, NSRunningApplication app, int index);
+/*!
+    @function
+    Gets NSRunningApplication at current index of given NSArray
+    @param NSArray The array with object you want to get
+    @param NSRunningApplication The NSRunningApplication you want to instantiate
+    @param index The index of the array to get
+*/
+void runningApplicationAtIndex(NSArray *arr, NSRunningApplication *app, int index);
 
-/*  @param sharedWorkspace object
+/*!
+    @function runningApplications
+    Populates given NSArray with NSRunningApplication objects
+    @param sharedWorkspace object
     @return an NSArray of runningApplication objects
 */
-NSArray runningApplications(NSWorkspace ws);
+void runningApplications(NSWorkspace *sharedWorkspace, NSArray *arr);
 
 #endif

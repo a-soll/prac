@@ -1,9 +1,5 @@
-#include <objc/runtime.h>
-#include <objc/message.h>
-
 // custom includes
-#include "../include/NSBase.h"
-#include "../include/NSObjects.h"
+#include <NSObjects/NSBase.h>
 
 // [[NSWorkspace sharedWorkspace] openFile:@"/Myfiles/README" withApplication:@"TextEdit"];
 int main() {
@@ -26,12 +22,8 @@ int main() {
     NSString app;
     NSWorkspace ws;
 
-    file = stringWithUTF8String("/Users/adam/code/mac_window/dump");
-    app = stringWithUTF8String("TextEdit");
-    ws = sharedWorkspace();
-    openURLsWithApp(ws, file, app);
-
-    free(file);
-    free(app);
-    free(ws);
+    stringWithUTF8String(&file, "/Users/adam/code/mac_window/dump");
+    stringWithUTF8String(&app, "TextEdit");
+    sharedWorkspace(&ws);
+    openURLsWithApp(&ws, &file, &app);
 }

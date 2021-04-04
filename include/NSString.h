@@ -3,12 +3,14 @@
 
 #include "NSObjects.h"
 
-extern NSString stringWithUTF8String(const char *cstring);
+/*!
+    @function stringWithUTF8String
+    Creates an NSString object from a C string
+    @param NSString NSString object to instantiate
+    @param char* String to instantiate with
+*/
+void stringWithUTF8String(NSString *nstr, const char *cstring);
 
-const char* CFStringGetCStringPTR(NSString str);
-
-void NSStringShow(NSString str);
-
-id _NSStringId(NSString str);
+void _NSStringFromId(NSString *nstr, id id);
 
 #endif

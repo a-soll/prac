@@ -1,29 +1,19 @@
 #include "../include/NSArray.h"
 
-struct _NSArray {
-    Class c;
-    id id;
-};
-
-NSArray _get_array(id caller_id, SEL method) {
-    NSArray arr = malloc(sizeof(NSArray));
-    Class temp_class = objc_getClass("NSArray");
-    id temp_id;
-    temp_id = ((id(*)(id, SEL))objc_msgSend)(caller_id, method);
-    arr->c = temp_class;
-    arr->id = temp_id;
-    return arr;
+void _get_array(NSArray *arr, id caller_id, SEL method) {
+    arr->_c = objc_getClass("NSArray");
+    arr->_id = ((id(*)(id, SEL))objc_msgSend)(caller_id, method);
 }
 
-int length(NSArray arr) {
+int count(NSArray *arr) {
     int count;
     SEL get_count = sel_registerName("count");
-    count = ((int (*)(id, SEL))objc_msgSend)(arr->id, get_count);
+    count = ((int (*)(id, SEL))objc_msgSend)(arr->_id, get_count);
     return count;
 }
 
-id objectAtIndex(NSArray arr, int index) {
+id objectAtIndex(NSArray *arr, int index) {
     SEL index_method = sel_registerName("objectAtIndex:");
-    id ret_id = ((id(*)(id, SEL, int))objc_msgSend)(arr->id, index_method, index);
-    return ret_id;
+    id temp_id = ((id(*)(id, SEL, int))objc_msgSend)(arr->_id, index_method, index);
+    return temp_id;
 }
