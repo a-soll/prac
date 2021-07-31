@@ -1,6 +1,7 @@
 #include "../include/NSWorkspace.h"
 #include "../include/NSArray.h"
 #include "../include/NSRunningApplication.h"
+#include <stdio.h>
 
 void sharedWorkspace(NSWorkspace *workspace) {
     Class temp_class = objc_getClass("NSWorkspace");
@@ -29,4 +30,37 @@ void runningApplications(NSWorkspace *sharedWorkspace, NSArray *arr) {
 void runningApplicationAtIndex(NSArray *arr, NSRunningApplication *app, int index) {
     id temp_id = objectAtIndex(arr, index);
     _NSRunningAppSetId(app, temp_id);
+}
+
+void activeSpaceDidChange(id self, SEL _sel, id notification) {
+    printf("yesyesyes\n");
+}
+
+/**
+ *  [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self
+        selector:@selector(activeSpaceDidChange:)
+        name:NSWorkspaceActiveSpaceDidChangeNotification
+        object:nil];
+ */
+/*
+- (void)activeSpaceDidChange:(NSNotification *)notification
+{
+    event_loop_post(&g_event_loop, SPACE_CHANGED, NULL, 0, NULL);
+}
+*/
+
+void notification(NSWorkspace *sharedWorkspace) {
+    NSString name;
+    SEL notif = sel_registerName("notificationCenter");
+    id nc = ((id (*)(id, SEL))objc_msgSend)(sharedWorkspace->_id, notif);
+    stringWithUTF8String(&name, "NSWorkspaceActiveSpacfeDidChangeNoftification");
+
+    SEL selector = sel_registerName("addObserver:selector:name:object:");
+    SEL space = sel_registerName("activeSpaceDidChange:");
+
+    class_addMethod(sharedWorkspace->_c, space, (IMP)activeSpaceDidChange, "v@:@");
+    // WS id, SEL notificationCenter, params
+    ((void (*)(id, SEL, id, id, id))objc_msgSend)(nc, selector, sharedWorkspace->_id, name._id, nil);
+    // ((void (*)(id, SEL, id, SEL, id))objc_msgSend)(sharedWorkspace->_id, notif, nc, space, sharedWorkspace->_id);
+    // ((void (*)(id, SEL, SEL, SEL, id, id))objc_msgSend)(nc, selector, self, space, name._id, nil);
 }

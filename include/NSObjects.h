@@ -24,6 +24,12 @@ typedef struct _NSWorkspace {
     Class contents;
 } NSWorkspace;
 
+typedef struct _NSNotificationCenter {
+    Class _c;
+    id _id;
+    Class contents;
+} NSNotificationCenter;
+
 typedef struct _NSArray {
     Class _c;
     id _id;

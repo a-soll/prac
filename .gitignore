@@ -4,3 +4,4 @@ build
 dump
 test*
 main.c
+.DS_Store

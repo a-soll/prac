@@ -1,5 +1,5 @@
-#ifndef NS_OBJECTS_NSWORKSPACE_H
-#define NS_OBJECTS_NSWORKSPACE_H
+#ifndef NSWORKSPACE_H
+#define NSWORKSPACE_H
 
 #include "NSObjects.h"
 #include "NSURL.h"
@@ -33,4 +33,6 @@ void runningApplicationAtIndex(NSArray *arr, NSRunningApplication *app, int inde
 */
 void runningApplications(NSWorkspace *sharedWorkspace, NSArray *arr);
 
-#endif
+void notification(NSWorkspace *sharedWorkspace);
+
+#endif /* NSWORKSPACE_H */
